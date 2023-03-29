@@ -11,16 +11,11 @@
 		<label :for="language">{{ language}}</label>
 	</template>
 	
-	<div>
-    <button v-on:click="getRecentRecalls">Get Recent Recalls</button>
-	</div>
 	
-	<div  v-for="recentRecallInformation in recentRecallInformationList.ALL" :key="recentRecallInformation.recallId" class="recall-data">
+	<div  v-for="recentRecallInformation in recentRecallInformationList.HEALTH" :key="recentRecallInformation.recallId" class="recall-data">
 		<div class="recall-title">
 			<div>
 				<span>{{recentRecallInformation.title}}</span>
-			</div>
-			<div>
 				<span class="location">{{recentRecallInformation.category}}</span>
 			</div>
 		</div>
@@ -43,10 +38,23 @@ export default {
 			currentLanguage: 'English',
 		};
 	},
+
+
+  created() {
+	// fetch on init
+	this.getRecentRecalls()
+  },
+  
+    watch: {
+    // re-fetch whenever currentBranch changes
+    currentLanguage: 'getRecentRecalls'
+  },
+
 	methods: {
 		getRecentRecalls() {
-			axios.get('https://healthycanadians.gc.ca/recall-alert-rappel-avis/api/recent/en')
-			.then(response => (this.recentRecallInformationList = response.data.results));
+			const url = 'https://healthycanadians.gc.ca/recall-alert-rappel-avis/api/recent/' + (this.currentLanguage == 'English'? "en":"fr");
+			
+			axios.get(url).then(response => (this.recentRecallInformationList = response.data.results));
 		}
 	} 
   
