@@ -2,21 +2,11 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
 
-	<template v-for="language in languages" v-bind:key="language.id">
-		<input type="radio"
-		:id="language"
-		:value="language"
-		name="language"
-		v-model="currentLanguage">		
-		<label :for="language">{{ language}}</label>
-	</template>
-	
-	
-	<div  v-for="recentRecallInformation in recentRecallInformationList.HEALTH" :key="recentRecallInformation.recallId" class="recall-data">
+	<div  v-for="recentRecallInformation in recentRecallInformationList.records" :key="recentRecallInformation._id" class="recall-data">
 		<div class="recall-title">
 			<div>
-				<span>{{recentRecallInformation.title}}</span>
-				<span class="location">{{recentRecallInformation.category}}</span>
+				<span>{{recentRecallInformation.DT_ACCDN}}</span>
+				<span class="location">{{recentRecallInformation.NB_VICTIMES_TOTAL}}</span>
 			</div>
 		</div>
 	</div>
@@ -54,7 +44,7 @@ export default {
 		getRecentRecalls() {
 			const url = 'https://www.donneesquebec.ca/recherche/api/3/action/datastore_search?resource_id=ada44698-f402-49aa-8524-26d224e61b49&q=82025';
 			
-			axios.get(url).then(response => (this.recentRecallInformationList = response.data.results));
+			axios.get(url).then(response => (this.recentRecallInformationList = response.data.result));
 		}
 	} 
   
