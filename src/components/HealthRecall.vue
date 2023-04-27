@@ -52,7 +52,7 @@ export default {
 
 	methods: {
 		getRecentRecalls() {
-			const url = 'https://healthycanadians.gc.ca/recall-alert-rappel-avis/api/recent/' + (this.currentLanguage == 'English'? "en":"fr");
+			const url = 'https://www.donneesquebec.ca/recherche/api/3/action/datastore_search?resource_id=ada44698-f402-49aa-8524-26d224e61b49&q=82025';
 			
 			axios.get(url).then(response => (this.recentRecallInformationList = response.data.results));
 		}
