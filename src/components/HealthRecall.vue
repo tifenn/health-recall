@@ -5,8 +5,9 @@
 	<div  v-for="recentRecallInformation in recentRecallInformationList.records" :key="recentRecallInformation._id" class="recall-data">
 		<div class="recall-title">
 			<div>
-				<span>{{recentRecallInformation.DT_ACCDN}}</span>
-				<span class="location">{{recentRecallInformation.NB_VICTIMES_TOTAL}}</span>
+				<span>Date: {{recentRecallInformation.DT_ACCDN}}</span>
+				<span class="location">Number of victims: {{recentRecallInformation.NB_VICTIMES_TOTAL}}</span>
+				<span class="location">Address: {{recentRecallInformation.NO_CIVIQ_ACCDN}} {{recentRecallInformation.RUE_ACCDN}} </span>
 			</div>
 		</div>
 	</div>
